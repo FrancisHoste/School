@@ -122,4 +122,17 @@ public class ArrayList<E> implements IndexList<E> {
 	private int getIndex(int index) {
 		return (index + index_of_first) % capacity;
 	}
+	
+	    //voor shrinkArray: nadenken over wanneer het voordeligst is om toe te passen!
+        private void shrinkArray() {
+		E small[] = (E[]) new Object[size()]; //eventueel nog +constante
+		int j = 0;
+		for (int i = getIndex(0); i < getIndex(capacity - 1); i++) {
+			small[j] = elements[i];
+			j++;
+		}
+		index_of_first = 0;
+		capacity = size();
+		elements = small;
+	}
 }
